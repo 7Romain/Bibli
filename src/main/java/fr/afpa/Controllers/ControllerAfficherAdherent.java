@@ -1,4 +1,4 @@
-package fr.afpa.controllers;
+package fr.afpa.Controllers;
 
 public class ControllerAfficherAdherent {
 
