@@ -1,6 +1,6 @@
 package fr.afpa.outils;
 
-public class utile {
+public class Utile {
          //Coucou
 
 }
