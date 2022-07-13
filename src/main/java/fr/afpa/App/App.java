@@ -1,4 +1,4 @@
-package fr.afpa.App;
+package fr.afpa.app;
 
 /**
  * Hello world!
