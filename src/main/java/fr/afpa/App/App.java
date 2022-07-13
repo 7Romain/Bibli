@@ -1,10 +1,10 @@
-package fr.afpa.App;
+package fr.afpa.app;
 
 /**
  * Hello world!
  *
  */
-//Salut
+// Salut
 public class App {
     public static void main(String[] args) {
         System.out.println("Hello World23!");
