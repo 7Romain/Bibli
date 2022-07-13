@@ -3,8 +3,10 @@ package fr.afpa.outils;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
+import java.util.ArrayList;
+
 public class Utile {
-    
+
     public static void exitApp(String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Quitter ?");
@@ -15,6 +17,14 @@ public class Utile {
             System.exit(0);
         }
 
+    }
+
+    public static ArrayList<String> lireBib() {
+        ArrayList<String> lstBib = new ArrayList<String>();
+        lstBib.add("Toutes les Bibliotèques");
+        lstBib.add("Bibliotèques de Marmusot");
+        lstBib.add("Bibliotèques à la con");
+        return lstBib;
     }
 
 }

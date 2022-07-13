@@ -1,26 +1,48 @@
 package fr.afpa.controllers;
 
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 
-public class ControllerStat {
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-    @javafx.fxml.FXML
+import static fr.afpa.outils.Utile.lireBib;
+
+public class ControllerStat implements Initializable {
+
+    @FXML
     private ComboBox cbxVue;
-    @javafx.fxml.FXML
+    @FXML
     private Button btnMenuPrincipal;
-    @javafx.fxml.FXML
+    @FXML
     private ComboBox cbxAnnee;
-    @javafx.fxml.FXML
-    private ComboBox cbsBib;
-    @javafx.fxml.FXML
+    @FXML
+    private ComboBox cbxBib;
+    @FXML
     private Button btnValider;
 
-    @javafx.fxml.FXML
+    @FXML
     public void onClickValider() {
     }
 
-    @javafx.fxml.FXML
+    @FXML
     public void onClickMenuPrincipal() {
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        init();
+    }
+
+    private void init() {
+        try {
+            ArrayList<String> lstBib = lireBib();
+            cbxBib.getItems().addAll(lstBib);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
