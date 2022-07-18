@@ -27,4 +27,12 @@ public class Utile {
         return lstBib;
     }
 
+//    public static ArrayList<String> lireLivre() {
+//
+//    }
+
+//    public static ArrayList<String> lireThème() {
+//
+//    }
+
 }

@@ -23,7 +23,9 @@ public class MainStat extends Application {
     public void start(final Stage stage) throws IOException {
         FXMLLoader fxmlLoader
                 = new FXMLLoader(MainStat.class.getResource("/fxml/ConsulterStat.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 300);
+        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+        stage.setMinHeight(600);
+        stage.setMinWidth(900);
         stage.setOnCloseRequest(event -> {
             event.consume();
             Utile.exitApp("Etes vous sùre ?");
