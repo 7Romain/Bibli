@@ -14,18 +14,14 @@ import java.io.IOException;
 // Salut
 public class App extends Application {
     public static void main(String[] args) {
-        System.out.println("Hello World23!");
-
-        System.out.println("Hello World23!");
-        System.out.println("Hello World23!");
         launch();
     }
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/afficherAdherent.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/menuPrincipal.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Hello!");
+        stage.setTitle("Menu principal");
         stage.setScene(scene);
         stage.show();
     }
