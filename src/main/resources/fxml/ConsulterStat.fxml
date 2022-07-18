@@ -47,7 +47,7 @@
 
 <AnchorPane minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.afpa.controllers.ControllerStat">
     <children>
-        <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <MenuBar fx:id="menuBar" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="Fichier">
                     <items>
@@ -97,21 +97,21 @@
                                         <Label fx:id="lblTitre" layoutX="14.0" layoutY="10.0" text=" Titre" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0" />
                                         <TableView fx:id="tabTheme" layoutX="14.0" layoutY="30.0" prefHeight="305.0" prefWidth="516.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="32.0">
                                             <columns>
-                                                <TableColumn prefWidth="75.0" text="Code thème" />
-                                                <TableColumn prefWidth="343.0" text="Thèmes" />
-                                                <TableColumn minWidth="0.0" prefWidth="98.0" text="Nb d'emprunt" />
+                                                <TableColumn fx:id="colCodeTheme" prefWidth="75.0" text="Code thème" />
+                                                <TableColumn fx:id="colTheme" prefWidth="343.0" text="Thèmes" />
+                                                <TableColumn fx:id="colNbEmpruntTheme" minWidth="0.0" prefWidth="98.0" text="Nb d'emprunt" />
                                             </columns>
                                         </TableView>
-                              <TableView fx:id="tabLivres" layoutX="14.0" layoutY="32.0" prefHeight="313.0" prefWidth="526.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="32.0">
-                                 <columns>
-                                    <TableColumn prefWidth="75.0" text="ISBN" />
-                                    <TableColumn prefWidth="343.99996185302734" text="Titre" />
-                                    <TableColumn minWidth="0.0" prefWidth="177.00003051757812" text="Auteur(s)" />
-                                    <TableColumn text="Thème" />
-                                    <TableColumn prefWidth="108.0" text="Nb d'exemplaires" />
-                                    <TableColumn prefWidth="91.0" text="Nb d'emprunt" />
-                                 </columns>
-                              </TableView>
+                                        <TableView fx:id="tabLivres" layoutX="14.0" layoutY="32.0" prefHeight="313.0" prefWidth="526.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="32.0">
+                                            <columns>
+                                                <TableColumn fx:id="colISBN" prefWidth="75.0" text="ISBN" />
+                                                <TableColumn fx:id="ColTitre" prefWidth="343.99996185302734" text="Titre" />
+                                                <TableColumn fx:id="ColAuteur" minWidth="0.0" prefWidth="177.00003051757812" text="Auteur(s)" />
+                                                <TableColumn fx:id="colThemeLivre" text="Thème" />
+                                                <TableColumn fx:id="colNbExemplaire" prefWidth="108.0" text="Nb d'exemplaires" />
+                                                <TableColumn fx:id="colNbEmpruntLivre" prefWidth="91.0" text="Nb d'emprunt" />
+                                            </columns>
+                                        </TableView>
                                     </children>
                                 </AnchorPane>
                             </center>
@@ -148,7 +148,7 @@
                 <Label fx:id="lblRole" layoutX="115.0" text="Responsable d'une bibliothèque" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="115.0" />
                 <Label maxWidth="-1.0" prefHeight="16.0" prefWidth="115.0" text="Connecté en tant que :" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                 </Label>
-                <Label layoutX="262.0" text="date" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                <Label fx:id="lblDate" layoutX="262.0" text="date" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" />
             </children>
         </AnchorPane>
     </children>

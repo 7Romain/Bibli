@@ -1,16 +1,25 @@
 package fr.afpa.controllers;
 
+import fr.afpa.app.App;
+import fr.afpa.entites.Theme;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static fr.afpa.outils.Utile.lireBib;
+import static fr.afpa.outils.Utile.lireTheme;
 
 /**
  * The type Controller stat.
@@ -35,7 +44,7 @@ public class ControllerStat implements Initializable {
     @FXML
     private Button btnImprimer;
     @FXML
-    private TableView tabTheme;
+    private TableView<Theme> tabTheme;
     @FXML
     private Button btnValiderBot;
     @FXML
@@ -46,6 +55,28 @@ public class ControllerStat implements Initializable {
     private AnchorPane panResu;
     @FXML
     private TableView tabLivres;
+    @FXML
+    private Label lblDate;
+    @FXML
+    private TableColumn colCodeTheme;
+    @FXML
+    private TableColumn colTheme;
+    @FXML
+    private TableColumn colNbEmpruntLivre;
+    @FXML
+    private TableColumn ColTitre;
+    @FXML
+    private TableColumn colISBN;
+    @FXML
+    private TableColumn colNbExemplaire;
+    @FXML
+    private TableColumn ColAuteur;
+    @FXML
+    private TableColumn colNbEmpruntTheme;
+    @FXML
+    private TableColumn colThemeLivre;
+    @FXML
+    private MenuBar menuBar;
 
     /**
      * On click valider.
@@ -65,6 +96,11 @@ public class ControllerStat implements Initializable {
             case TAB_Theme -> {
                 tabTheme.setVisible(true);
                 tabLivres.setVisible(false);
+                ObservableList<Theme> listTheme = lireTheme();
+                colCodeTheme.setCellFactory(new PropertyValueFactory<>("Code Thème"));
+                colTheme.setCellFactory(new PropertyValueFactory<>("Thèmes"));
+                colNbEmpruntTheme.setCellFactory(new PropertyValueFactory<>("Nb d'emprunts"));
+                tabTheme.setItems(listTheme);
 
             }
             case TAB_LIVRE -> {
@@ -75,6 +111,7 @@ public class ControllerStat implements Initializable {
                 tabLivres.setVisible(false);
                 tabTheme.setVisible(false);
             }
+
         }
     }
 
@@ -82,7 +119,13 @@ public class ControllerStat implements Initializable {
      * On click menu principal.
      */
     @FXML
-    public void onClickMenuPrincipal() {
+    public void onClickMenuPrincipal() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/menuPrincipal.fxml"));
+        Stage stage = (Stage) (menuBar.getScene().getWindow());
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Emprunter");
+        stage.setScene(scene);
+        stage.show();
     }
 
     @Override
@@ -124,6 +167,7 @@ public class ControllerStat implements Initializable {
         btnValiderTop.setVisible(false);
         tabTheme.setVisible(false);
         tabLivres.setVisible(false);
+        lblDate.setText(String.valueOf(LocalDate.now()));
 
     }
 
