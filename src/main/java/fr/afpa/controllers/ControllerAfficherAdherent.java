@@ -20,73 +20,78 @@ import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * The type Controller afficher adherent.
+ */
 public class ControllerAfficherAdherent implements Initializable {
 
+    /**
+     * The Stage.
+     */
+    Stage stage;
     @FXML
     private Button btnImpreimerTicket;
-
     @FXML
     private Button btnModifier;
-
     @FXML
     private Button btnRetour;
-
     @FXML
     private Label lblAdresse;
-
     @FXML
     private Label lblNbPretEnCours;
-
     @FXML
     private Label lblNom;
-
     @FXML
     private Label lblNumAdherent;
-
     @FXML
     private Label lblPrenom;
-
     @FXML
     private Label lblPretRetard;
-
     @FXML
     private Label lblRole;
-
     @FXML
     private Label lblTel;
-
     @FXML
     private TableView<?> tblPretEnCours;
-
     @FXML
     private Font x3;
-
     @FXML
     private Font x31;
-
     @FXML
     private Color x4;
-
     @FXML
     private Color x41;
 
+    /**
+     * Imprimer ticket.
+     *
+     * @param event the event
+     */
     @FXML
     void imprimerTicket(ActionEvent event) {
         imprimer();
 
     }
 
+    /**
+     * Modifier adherent.
+     *
+     * @param event the event
+     */
     @FXML
     void modifierAdherent(ActionEvent event) {
 
     }
 
+    /**
+     * Retour vers rechercher adherent.
+     *
+     * @param event the event
+     */
     @FXML
     void retourVersRechercherAdherent(ActionEvent event) {
 
     }
-
-    Stage stage;
 
     private void imprimer() {
         try {

@@ -8,7 +8,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The type Main stat.
+ */
 public class MainStat extends Application {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         launch();
     }

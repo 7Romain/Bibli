@@ -1,4 +1,3 @@
-
 // /**
 //  * Hello world!
 //  *
@@ -34,7 +33,15 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * The type App.
+ */
 public class App extends Application {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         System.out.println(App.class.getResource("/fxml/afficherAdherent.fxml"));
         launch();

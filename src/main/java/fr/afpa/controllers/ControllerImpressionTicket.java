@@ -9,6 +9,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
+/**
+ * The type Controller impression ticket.
+ */
 public class ControllerImpressionTicket implements Initializable {
 
     @FXML
