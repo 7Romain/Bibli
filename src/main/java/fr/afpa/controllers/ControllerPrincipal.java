@@ -1,19 +1,21 @@
 package fr.afpa.controllers;
 
-import fr.afpa.App.App;
+import fr.afpa.app.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
-public class ControllerPrincipal {
+public class ControllerPrincipal implements Initializable {
 
     @FXML
     private Button btnEmprunt;
@@ -24,9 +26,21 @@ public class ControllerPrincipal {
     @FXML
     private MenuItem itmAbout;
     @FXML
+    private Label lblDate;
+    @FXML
     private MenuBar menuBar;
     private Stage stage;
     private Scene scene;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        init();
+    }
+
+    private void init() {
+        DateTimeFormatter frformat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        lblDate.setText(LocalDate.now().format(frformat));
+    }
 
     @FXML
     void ouvrirPageEmprunt(ActionEvent event) throws IOException {
@@ -40,7 +54,7 @@ public class ControllerPrincipal {
 
     @FXML
     void ouvrirPageFonds(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/afficherAdherent.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/ficheExemplaire.fxml"));
         stage = (Stage) (menuBar.getScene().getWindow());
         scene = new Scene(fxmlLoader.load());
         stage.setTitle("Consulter le fonds");
@@ -50,7 +64,7 @@ public class ControllerPrincipal {
 
     @FXML
     void ouvrirPageStats(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/afficherAdherent.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/ConsulterStat.fxml"));
         stage = (Stage) (menuBar.getScene().getWindow());
         scene = new Scene(fxmlLoader.load());
         stage.setTitle("Statistiques");
@@ -71,6 +85,7 @@ public class ControllerPrincipal {
     void exit(ActionEvent event) {
         System.exit(0);
     }
+
 
 }
 

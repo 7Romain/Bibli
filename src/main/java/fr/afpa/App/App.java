@@ -1,5 +1,6 @@
-package fr.afpa.App;
+package fr.afpa.app;
 
+import fr.afpa.outils.Utile;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,7 +10,6 @@ import java.io.IOException;
 
 /**
  * Hello world!
- *
  */
 // Salut
 public class App extends Application {
@@ -24,5 +24,11 @@ public class App extends Application {
         stage.setTitle("Menu principal");
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(event -> {
+            event.consume();
+            Utile.exitApp("Êtes-vous sûr ?");
+        });
     }
+
+
 }
