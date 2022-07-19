@@ -36,7 +36,7 @@ import javafx.stage.Stage;
 
 public class App extends Application {
     public static void main(String[] args) {
-        System.out.println(App.class.getResource("/fxml/afficherAdherent.fxml"));
+        System.out.println(App.class.getResource("/fxml/rechercherAdherent.fxml"));
         launch();
     }
 
@@ -48,7 +48,7 @@ public class App extends Application {
 
     @Override
     public void start(final Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/afficherAdherent.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/rechercherAdherent.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setOnCloseRequest(event -> {
             event.consume();
