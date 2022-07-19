@@ -13,34 +13,58 @@ public class Livre {
         this.auteur = auteur;
     }
 
+    /**
+     * @return String
+     */
     public String getIsbnLivre() {
         return isbnLivre;
     }
 
+    /**
+     * @param isbnLivre
+     */
     public void setIsbnLivre(String isbnLivre) {
         this.isbnLivre = isbnLivre;
     }
 
+    /**
+     * @return String
+     */
     public String getCodTheme() {
         return codTheme;
     }
 
+    /**
+     * @param codTheme
+     */
     public void setCodTheme(String codTheme) {
         this.codTheme = codTheme;
     }
 
+    /**
+     * @return String
+     */
     public String getTitreLivre() {
         return titreLivre;
     }
 
+    /**
+     * @param titreLivre
+     */
     public void setTitreLivre(String titreLivre) {
         this.titreLivre = titreLivre;
     }
 
+    /**
+     * @return Auteur
+     */
     public Auteur getAuteur() {
         return auteur;
     }
 
+    /**
+     * @param auteur
+     */
     public void setAuteur(Auteur auteur) {
         this.auteur = auteur;
     }

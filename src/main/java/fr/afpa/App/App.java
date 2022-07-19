@@ -38,6 +38,10 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class App extends Application {
+
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         System.out.println(App.class.getResource("/fxml/afficherAdherent.fxml"));
         launch();
