@@ -10,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Utile {
@@ -64,9 +66,7 @@ public class Utile {
                     listTheme.add(theme);
                 }
             } while (ligneLue != null);
-
             ObservableList<Theme> data = FXCollections.observableArrayList(listTheme);
-            System.out.println(data);
             return data;
         } catch (NullPointerException npe) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -88,5 +88,22 @@ public class Utile {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public static LocalDateTime getDateTime() {
+        return LocalDateTime.now();
+
+    }
+
+    public static String getDateTimeString() {
+        final String DATE_FORMATTER_JOUR = "dd/MM/yyyy";
+        final String DATE_FORMATTER_HEURE = "HH'h'mm";
+        LocalDateTime localDateTime = LocalDateTime.now();
+        DateTimeFormatter formatterJ = DateTimeFormatter.ofPattern(DATE_FORMATTER_JOUR);
+        DateTimeFormatter formatterH = DateTimeFormatter.ofPattern(DATE_FORMATTER_HEURE);
+        String formatDateTimeJ = localDateTime.format(formatterJ);
+        String formatDateTimeH = localDateTime.format(formatterH);
+        return String.format("Le %s à %s ", formatDateTimeJ, formatDateTimeH);
+
     }
 }
