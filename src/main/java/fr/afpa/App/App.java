@@ -57,6 +57,8 @@ public class App extends Application {
         stage.setTitle("La MÉGATHEQUE de Marmusots");
         stage.setScene(scene);
         stage.show();
+        stage.setMinHeight(600);
+        stage.setMinWidth(900);
 
     }
 }
