@@ -30,6 +30,9 @@ public class ControllerStat implements Initializable {
     private static final String GRAF_THEME = "Graphique par thème";
 
     @FXML
+    private TableColumn colDescription;
+
+    @FXML
     private ComboBox cbxVue;
     @FXML
     private Button btnMenuPrincipal;
@@ -97,9 +100,11 @@ public class ControllerStat implements Initializable {
                 tabTheme.setVisible(true);
                 tabLivres.setVisible(false);
                 ObservableList<Theme> listTheme = lireTheme();
-                colCodeTheme.setCellFactory(new PropertyValueFactory<>("Code Thème"));
-                colTheme.setCellFactory(new PropertyValueFactory<>("Thèmes"));
-                colNbEmpruntTheme.setCellFactory(new PropertyValueFactory<>("Nb d'emprunts"));
+                colCodeTheme.setCellValueFactory(new PropertyValueFactory<Theme, String>("codeTheme"));
+                colTheme.setCellValueFactory(new PropertyValueFactory<Theme, String>("theme"));
+                colDescription.setCellValueFactory(new PropertyValueFactory<Theme, String>("descripTheme"));
+                colNbEmpruntTheme.setCellValueFactory(new PropertyValueFactory<Theme, String>("nbEmprunt"));
+
                 tabTheme.setItems(listTheme);
 
             }

@@ -1,11 +1,10 @@
-Code Thème,Thèmes, Nb d'emprunts
-0,Tous les thèmes,688
-1,Sciences,100
-2,Littérature,120
-3,Philosophie,90
-4,Arts,26
-5,Maison et loisirs,153
-6,Religion,2
-7,Histoire et géographie,64
-8,Economie et société,83
-9,Généralités,50
+0,Tous les thèmes,tout sur tout,688
+1,Sciences,pour les scientifiques,100
+2,Littérature,pour les littéraires ,120
+3,Philosophie,pour les philosophes,90
+4,Arts,pour les artistes,26
+5,Maison et loisirs,pour bricoler et s'ammuser ,153
+6,Religion,pour prier dieu,2
+7,Histoire et géographie,tous connaitre du passé et du monde actuel,64
+8,Economie et société,pour le fric,83
+9,Généralités,le rest,50

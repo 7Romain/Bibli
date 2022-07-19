@@ -45,21 +45,28 @@ public class Utile {
                     = new LineNumberReader(fileReader);
             String ligneLue;
             String codeTheme;
-            String theme;
+            String lTheme;
             String description;
+            int nbEmprunt;
+            Theme theme;
             ArrayList<Theme> listTheme = new ArrayList<>();
             do {
                 ligneLue = lineNumberReader.readLine();
                 if (ligneLue != null) {
                     codeTheme = ligneLue.substring(0, ligneLue.indexOf(","));
-                    ligneLue = ligneLue.substring(ligneLue.indexOf(","));
-                    theme = ligneLue.substring(0, ligneLue.indexOf(","));
-                    description = ligneLue.substring(ligneLue.indexOf(","));
-                    listTheme.add(new Theme(codeTheme, theme, description));
+                    ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
+                    lTheme = ligneLue.substring(0, ligneLue.indexOf(","));
+                    ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
+                    description = ligneLue.substring(0, ligneLue.indexOf(","));
+                    ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
+                    nbEmprunt = Integer.parseInt(ligneLue);
+                    theme = new Theme(codeTheme, lTheme, description, nbEmprunt);
+                    listTheme.add(theme);
                 }
             } while (ligneLue != null);
 
             ObservableList<Theme> data = FXCollections.observableArrayList(listTheme);
+            System.out.println(data);
             return data;
         } catch (NullPointerException npe) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
