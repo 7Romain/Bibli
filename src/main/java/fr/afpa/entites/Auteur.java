@@ -14,7 +14,9 @@ public class Auteur {
      * @param nomPrenomAuteur the nom prenom auteur
      */
     public Auteur(String nomPrenomAuteur) {
-        nomAuteur = nomPrenomAuteur.substring(0, nomPrenomAuteur.indexOf(" "));
+        codeAuteur = " ";
+        prenomAuteur = nomPrenomAuteur.substring(0, nomPrenomAuteur.indexOf(" "));
+        nomAuteur = nomPrenomAuteur.substring(nomPrenomAuteur.indexOf(" "));
     }
 
     /**
@@ -86,6 +88,7 @@ public class Auteur {
 
     @Override
     public String toString() {
+
         return String.format("%s %s %s", codeAuteur, nomAuteur, prenomAuteur);
     }
 }

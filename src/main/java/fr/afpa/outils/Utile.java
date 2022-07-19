@@ -26,7 +26,7 @@ public class Utile {
      *
      * @param message the message
      */
-    public static void exitApp(String message) {
+    public static void exitApp(final String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Quitter ?");
         alert.setHeaderText(message);
@@ -53,13 +53,15 @@ public class Utile {
 
     /**
      * Lire livre dans le fichier csv.
-     * lit le fichier csv contenant les livres et renvoie un ObservableList de tous les livres
+     * lit le fichier csv contenant les livres
+     * et renvoie un ObservableList de tous les livres
      *
      * @return the observable list
      */
     public static ObservableList<Livre> lireLivre() {
         try {
-            FileReader fileReader = new FileReader("src/main/resources/csv/lstLivre.csv");
+            FileReader fileReader = new FileReader(
+                    "src/main/resources/csv/lstLivre.csv");
             LineNumberReader lineNumberReader
                     = new LineNumberReader(fileReader);
             String ligneLue;
@@ -76,35 +78,35 @@ public class Utile {
                 ligneLue = lineNumberReader.readLine();
                 if (ligneLue != null) {
                     isbnLivre = ligneLue.substring(0, ligneLue.indexOf(","));
-                    ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
-                    System.out.println(isbnLivre);
 
+                    ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
                     titreLivre = ligneLue.substring(0, ligneLue.indexOf(","));
-                    ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
-                    System.out.println(titreLivre);
 
-                    auteur = new Auteur(ligneLue.substring(0, ligneLue.indexOf(",")));
                     ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
-                    System.out.println(auteur);
+                    auteur = new Auteur(
+                            ligneLue.substring(0, ligneLue.indexOf(",")));
 
+                    ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
                     codTheme = ligneLue.substring(0, ligneLue.indexOf(","));
-                    ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
-                    System.out.println(codTheme);
 
-                    nbExemplaire = Integer.parseInt(ligneLue.substring(0, ligneLue.indexOf(",")));
                     ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
-                    System.out.println(nbExemplaire);
+                    nbExemplaire = Integer.parseInt(
+                            ligneLue.substring(0, ligneLue.indexOf(",")));
 
+                    ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
                     nbEmprunt = Integer.parseInt(ligneLue);
-                    System.out.println(nbEmprunt);
 
-                    livre = new Livre(isbnLivre, codTheme, titreLivre, auteur, nbExemplaire, nbEmprunt);
+                    livre = new Livre(isbnLivre,
+                            codTheme,
+                            titreLivre,
+                            auteur,
+                            nbExemplaire,
+                            nbEmprunt);
                     listLivre.add(livre);
                 }
             } while (ligneLue != null);
-            ObservableList<Livre> data = FXCollections.observableArrayList(listLivre);
 
-            return data;
+            return FXCollections.observableArrayList(listLivre);
         } catch (NullPointerException npe) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
@@ -129,13 +131,15 @@ public class Utile {
 
     /**
      * Lire thème dans le fichier csv.
-     * lit le fichier csv contenant les thèmes et renvoie un ObservableList de tous les thèmes
+     * lit le fichier csv contenant les thèmes
+     * et renvoie un ObservableList de tous les thèmes
      *
      * @return the observable list
      */
     public static ObservableList<Theme> lireTheme() {
         try {
-            FileReader fileReader = new FileReader("src/main/resources/csv/lstThèmes");
+            FileReader fileReader = new FileReader(
+                    "src/main/resources/csv/lstThèmes");
             LineNumberReader lineNumberReader
                     = new LineNumberReader(fileReader);
             String ligneLue;
@@ -155,12 +159,14 @@ public class Utile {
                     description = ligneLue.substring(0, ligneLue.indexOf(","));
                     ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
                     nbEmprunt = Integer.parseInt(ligneLue);
-                    theme = new Theme(codeTheme, lTheme, description, nbEmprunt);
+                    theme = new Theme(codeTheme,
+                            lTheme,
+                            description,
+                            nbEmprunt);
                     listTheme.add(theme);
                 }
             } while (ligneLue != null);
-            ObservableList<Theme> data = FXCollections.observableArrayList(listTheme);
-            return data;
+            return FXCollections.observableArrayList(listTheme);
         } catch (NullPointerException npe) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
@@ -178,7 +184,6 @@ public class Utile {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(e.getMessage());
             alert.setTitle("Erreur");
-            System.out.println(e.getMessage());
         }
         return null;
     }

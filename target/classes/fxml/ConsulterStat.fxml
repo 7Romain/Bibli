@@ -120,9 +120,9 @@
                                                    AnchorPane.topAnchor="32.0">
                                             <columns>
                                                 <TableColumn fx:id="colISBN" prefWidth="75.0" text="ISBN"/>
-                                                <TableColumn fx:id="ColTitre" prefWidth="343.99996185302734"
+                                                <TableColumn fx:id="colTitre" prefWidth="343.99996185302734"
                                                              text="Titre"/>
-                                                <TableColumn fx:id="ColAuteur" minWidth="0.0"
+                                                <TableColumn fx:id="colAuteur" minWidth="0.0"
                                                              prefWidth="177.00003051757812" text="Auteur(s)"/>
                                                 <TableColumn fx:id="colThemeLivre" text="Thème"/>
                                                 <TableColumn fx:id="colNbExemplaire" prefWidth="108.0"

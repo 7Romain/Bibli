@@ -28,7 +28,7 @@ public class ControllerStat implements Initializable {
     /**
      * Constante de "Tableau par thème".
      */
-    private static final String TAB_Theme = "Tableau par thème";
+    private static final String TAB_THEME = "Tableau par thème";
     /**
      * Constante de "Tableau par livre".
      */
@@ -37,6 +37,10 @@ public class ControllerStat implements Initializable {
      * Constante de "Graphique par thème".
      */
     private static final String GRAF_THEME = "Graphique par thème";
+    /**
+     * Constante du nombre d'année consultable.
+     */
+    private static final int NB_ANNEE = 5;
     /**
      * The Menu bar.
      */
@@ -143,12 +147,12 @@ public class ControllerStat implements Initializable {
      * colonne du titre du livre.
      */
     @FXML
-    private TableColumn ColTitre;
+    private TableColumn colTitre;
     /**
      * colonne de l'auteur du livre.
      */
     @FXML
-    private TableColumn ColAuteur;
+    private TableColumn colAuteur;
     /**
      * colonne du theme du livre.
      */
@@ -172,7 +176,8 @@ public class ControllerStat implements Initializable {
      */
     @FXML
     public void onClickValider() {
-        lblTitre.setText(String.format("%s pour %s : %s", cbxBib.getValue(), cbxAnnee.getValue(), cbxVue.getValue()));
+        lblTitre.setText(String.format("%s pour %s : %s",
+                cbxBib.getValue(), cbxAnnee.getValue(), cbxVue.getValue()));
         panResu.setVisible(true);
         btnImprimer.setVisible(true);
         btnAnnuler.setVisible(true);
@@ -180,26 +185,38 @@ public class ControllerStat implements Initializable {
 
         String vue = (String) cbxVue.getValue();
         switch (vue) {
-            case TAB_Theme -> {
+            case TAB_THEME -> {
                 tabTheme.setVisible(true);
                 tabLivres.setVisible(false);
                 ObservableList<Theme> listTheme = lireTheme();
-                colCodeTheme.setCellValueFactory(new PropertyValueFactory<Theme, String>("codeTheme"));
-                colTheme.setCellValueFactory(new PropertyValueFactory<Theme, String>("theme"));
-                colDescription.setCellValueFactory(new PropertyValueFactory<Theme, String>("descripTheme"));
-                colNbEmpruntTheme.setCellValueFactory(new PropertyValueFactory<Theme, String>("nbEmprunt"));
+                colCodeTheme.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("codeTheme"));
+                colTheme.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("theme"));
+                colDescription.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>(
+                                "descripTheme"));
+                colNbEmpruntTheme.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("nbEmprunt"));
                 tabTheme.setItems(listTheme);
             }
             case TAB_LIVRE -> {
                 tabLivres.setVisible(true);
                 tabTheme.setVisible(false);
                 ObservableList<Livre> listLivre = lireLivre();
-                colISBN.setCellValueFactory(new PropertyValueFactory<Theme, String>("IsbnLivre"));
-                ColTitre.setCellValueFactory(new PropertyValueFactory<Theme, String>("titreLivre"));
-                ColAuteur.setCellValueFactory(new PropertyValueFactory<Theme, String>("auteur"));
-                colThemeLivre.setCellValueFactory(new PropertyValueFactory<Theme, String>("codTheme"));
-                colNbExemplaire.setCellValueFactory(new PropertyValueFactory<Theme, String>("nbExemplaire"));
-                colNbEmpruntLivre.setCellValueFactory(new PropertyValueFactory<Theme, String>("nbEmprunt"));
+                colISBN.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("IsbnLivre"));
+                colTitre.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("titreLivre"));
+                colAuteur.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("auteur"));
+                colThemeLivre.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("codTheme"));
+                colNbExemplaire.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>(
+                                "nbExemplaire"));
+                colNbEmpruntLivre.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("nbEmprunt"));
                 tabLivres.setItems(listLivre);
             }
             case GRAF_THEME -> {
@@ -217,7 +234,8 @@ public class ControllerStat implements Initializable {
      */
     @FXML
     public void onClickMenuPrincipal() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/menuPrincipal.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                App.class.getResource("/fxml/menuPrincipal.fxml"));
         Stage stage = (Stage) (menuBar.getScene().getWindow());
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Emprunter");
@@ -229,13 +247,14 @@ public class ControllerStat implements Initializable {
      * initialise la page.
      */
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(final URL url, final ResourceBundle resourceBundle) {
         init();
     }
 
     /**
-     * initialise les Combo box;
-     * avec la list des bibliothèque grace a l'appel de la fonction lireBib() dans la classe Utile
+     * initialise les Combo box.
+     * avec la list des bibliothèque grace a l'appel
+     * de la fonction lireBib() dans la classe Utile
      * avec les 5 dernieres années (presente incluse)
      * avec les types de vue possibles
      * rend visible les boutons voulus
@@ -248,14 +267,14 @@ public class ControllerStat implements Initializable {
 
         int anneeEnCour = LocalDate.now().getYear();
         ArrayList<Integer> lstAnnee = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < NB_ANNEE; i++) {
             lstAnnee.add(anneeEnCour - i);
         }
         cbxAnnee.getItems().addAll(lstAnnee);
         cbxAnnee.setValue(cbxAnnee.getItems().get(0));
 
         ArrayList<String> lstVue = new ArrayList<>();
-        lstVue.add(TAB_Theme);
+        lstVue.add(TAB_THEME);
         lstVue.add(TAB_LIVRE);
         lstVue.add(GRAF_THEME);
         cbxVue.getItems().addAll(lstVue);
@@ -286,10 +305,11 @@ public class ControllerStat implements Initializable {
 
     /**
      * On click print.
-     *
-     * @TODO à faire
      */
     @FXML
     public void onClickPrint() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Impression en cours");
+        alert.setHeaderText("Impression en cours");
     }
 }
