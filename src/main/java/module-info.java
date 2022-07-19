@@ -10,6 +10,7 @@ module fr.afpa.app {
 
     opens fr.afpa.App to javafx.fxml;
     opens fr.afpa.controllers;
+    opens fr.afpa.entites;
 
     exports fr.afpa.App;
 }

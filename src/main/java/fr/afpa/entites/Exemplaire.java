@@ -2,29 +2,39 @@ package fr.afpa.entites;
 
 public class Exemplaire {
 
-    private String numExemplaire;
+    private String titre;
     private String codBibliotheque;
     private String codEmplacement;
     private String isbnLivre;
     private String codExemplaire;
-    private boolean disponible;
+    private String disponible;
+    private String dateRetour;
 
-    public Exemplaire(String numExemplaire, String codBibliotheque, String codEmplacement, String isbnLivre,
-            String codExemplaire, boolean disponible) {
-        this.numExemplaire = numExemplaire;
+    public String getDateRetour() {
+        return dateRetour;
+    }
+
+    public void setDateRetour(String dateRetour) {
+        this.dateRetour = dateRetour;
+    }
+
+    public Exemplaire(String titre, String codBibliotheque, String codEmplacement, String isbnLivre,
+            String codExemplaire, String disponible, String dateRetour) {
+        this.titre = titre;
         this.codBibliotheque = codBibliotheque;
         this.codEmplacement = codEmplacement;
         this.isbnLivre = isbnLivre;
         this.codExemplaire = codExemplaire;
         this.disponible = disponible;
+        this.dateRetour = dateRetour;
     }
 
-    public String getNumExemplaire() {
-        return numExemplaire;
+    public String getTitre() {
+        return titre;
     }
 
-    public void setNumExemplaire(String numExemplaire) {
-        this.numExemplaire = numExemplaire;
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     public String getCodBibliotheque() {
@@ -59,12 +69,19 @@ public class Exemplaire {
         this.codExemplaire = codExemplaire;
     }
 
-    public boolean isDisponible() {
+    public String isDisponible() {
         return disponible;
     }
 
-    public void setDisponible(boolean disponible) {
+    public void setDisponible(String disponible) {
         this.disponible = disponible;
+    }
+
+    @Override
+    public String toString() {
+        return "Exemplaire [codBibliotheque=" + codBibliotheque + ", codEmplacement=" + codEmplacement
+                + ", codExemplaire=" + codExemplaire + ", disponible=" + disponible + ", isbnLivre=" + isbnLivre
+                + ", titre=" + titre + "]";
     }
 
 }

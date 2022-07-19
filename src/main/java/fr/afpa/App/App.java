@@ -25,9 +25,12 @@ package fr.afpa.App;
 
 import java.io.IOException;
 
+import fr.afpa.entites.Exemplaire;
 import fr.afpa.outils.Utile;
 //import fr.afpa.outils.Utile;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -38,6 +41,7 @@ public class App extends Application {
     public static void main(String[] args) {
         System.out.println(App.class.getResource("/fxml/afficherAdherent.fxml"));
         launch();
+
     }
 
     /**
