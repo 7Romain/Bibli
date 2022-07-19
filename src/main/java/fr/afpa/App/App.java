@@ -21,7 +21,7 @@
 
 //     }
 // }
-package fr.afpa.app;
+package fr.afpa.App;
 
 import java.io.IOException;
 

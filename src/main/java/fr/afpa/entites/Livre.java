@@ -18,7 +18,7 @@ public class Livre {
     }
 
     public void setIsbnLivre(String isbnLivre) {
-        isbnLivre = isbnLivre;
+        this.isbnLivre = isbnLivre;
     }
 
     public String getCodTheme() {

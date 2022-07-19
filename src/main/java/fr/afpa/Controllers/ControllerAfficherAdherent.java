@@ -1,15 +1,16 @@
+
 package fr.afpa.controllers;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.stream.BaseStream;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -110,6 +111,7 @@ public class ControllerAfficherAdherent implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        // TODO Auto-generated method stub
 
     }
 

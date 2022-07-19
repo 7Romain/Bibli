@@ -8,6 +8,13 @@
             "type": "java",
             "name": "Launch App",
             "request": "launch",
+            "mainClass": "fr.afpa.app/fr.afpa.App.App",
+            "projectName": "megatheque"
+        },
+        {
+            "type": "java",
+            "name": "Launch App",
+            "request": "launch",
             "mainClass": "fr.afpa.app/fr.afpa.app.App",
             "projectName": "megatheque"
         },
