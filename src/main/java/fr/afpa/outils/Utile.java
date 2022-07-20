@@ -1,5 +1,7 @@
 package fr.afpa.outils;
 
+import fr.afpa.entites.Auteur;
+import fr.afpa.entites.Livre;
 import fr.afpa.entites.Theme;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,13 +16,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * The type Utile.
+ */
 public class Utile {
 
-    public static void exitApp(String message) {
+    /**
+     * Exit app.
+     *
+     * @param message the message
+     */
+    public static void exitApp(final String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Quitter ?");
         alert.setHeaderText(message);
-        alert.setContentText("Êtes-vous sûr de vouloir quitter l'application");
+        alert.setContentText("Êtes-vous sur de vouloir quitter l'application");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
             System.exit(0);
@@ -28,6 +38,11 @@ public class Utile {
 
     }
 
+    /**
+     * Lire bib array list.
+     *
+     * @return the array list
+     */
     public static ArrayList<String> lireBib() {
         ArrayList<String> lstBib = new ArrayList<String>();
         lstBib.add("Toutes les Bibliotèques");
@@ -36,13 +51,98 @@ public class Utile {
         return lstBib;
     }
 
-//    public static ArrayList<String> lireLivre() {
-//
-//    }
+    /**
+     * Lire livre dans le fichier csv.
+     * lit le fichier csv contenant les livres
+     * et renvoie un ObservableList de tous les livres
+     *
+     * @return the observable list
+     */
+    public static ObservableList<Livre> lireLivre() {
+        try {
+            FileReader fileReader = new FileReader(
+                    "src/main/resources/csv/lstLivre.csv");
+            LineNumberReader lineNumberReader
+                    = new LineNumberReader(fileReader);
+            String ligneLue;
+            String isbnLivre;
+            String codTheme;
+            String titreLivre;
+            Auteur auteur;
+            int nbExemplaire;
+            int nbEmprunt;
 
+            Livre livre;
+            ArrayList<Livre> listLivre = new ArrayList<>();
+            do {
+                ligneLue = lineNumberReader.readLine();
+                if (ligneLue != null) {
+                    isbnLivre = ligneLue.substring(0, ligneLue.indexOf(","));
+
+                    ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
+                    titreLivre = ligneLue.substring(0, ligneLue.indexOf(","));
+
+                    ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
+                    auteur = new Auteur(ligneLue.substring(0, ligneLue.indexOf(",")));
+
+                    ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
+                    codTheme = ligneLue.substring(0, ligneLue.indexOf(","));
+
+                    ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
+                    nbExemplaire = Integer.parseInt(
+                            ligneLue.substring(0, ligneLue.indexOf(",")));
+
+                    ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
+                    nbEmprunt = Integer.parseInt(ligneLue);
+
+                    livre = new Livre(isbnLivre,
+                            codTheme,
+                            titreLivre,
+                            auteur,
+                            nbExemplaire,
+                            nbEmprunt);
+                    listLivre.add(livre);
+                }
+            } while (ligneLue != null);
+
+            return FXCollections.observableArrayList(listLivre);
+        } catch (NullPointerException npe) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(npe.getMessage());
+            alert.showAndWait();
+        } catch (FileNotFoundException fnfe) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(fnfe.getMessage());
+            alert.setContentText("fichier non trouvé !");
+            alert.showAndWait();
+
+        } catch (IOException ioe) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.showAndWait();
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(e.getMessage());
+            alert.setTitle("Erreur");
+            alert.showAndWait();
+        }
+        return null;
+
+    }
+
+    /**
+     * Lire thème dans le fichier csv.
+     * lit le fichier csv contenant les thèmes
+     * et renvoie un ObservableList de tous les thèmes
+     *
+     * @return the observable list
+     */
     public static ObservableList<Theme> lireTheme() {
         try {
-            FileReader fileReader = new FileReader("src/main/resources/csv/lstThèmes");
+            FileReader fileReader = new FileReader(
+                    "src/main/resources/csv/lstThemes.csv");
             LineNumberReader lineNumberReader
                     = new LineNumberReader(fileReader);
             String ligneLue;
@@ -62,39 +162,54 @@ public class Utile {
                     description = ligneLue.substring(0, ligneLue.indexOf(","));
                     ligneLue = ligneLue.substring(ligneLue.indexOf(",") + 1);
                     nbEmprunt = Integer.parseInt(ligneLue);
-                    theme = new Theme(codeTheme, lTheme, description, nbEmprunt);
+                    theme = new Theme(codeTheme,
+                            lTheme,
+                            description,
+                            nbEmprunt);
                     listTheme.add(theme);
                 }
             } while (ligneLue != null);
-            ObservableList<Theme> data = FXCollections.observableArrayList(listTheme);
-            return data;
+            return FXCollections.observableArrayList(listTheme);
         } catch (NullPointerException npe) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText(npe.getMessage());
+            alert.showAndWait();
         } catch (FileNotFoundException fnfe) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText(fnfe.getMessage());
             alert.setContentText("fichier non trouvé !");
+            alert.showAndWait();
 
         } catch (IOException ioe) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
+            alert.showAndWait();
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(e.getMessage());
             alert.setTitle("Erreur");
-            System.out.println(e.getMessage());
+            alert.showAndWait();
         }
         return null;
     }
 
+    /**
+     * Gets date time.
+     *
+     * @return the date time
+     */
     public static LocalDateTime getDateTime() {
         return LocalDateTime.now();
 
     }
 
+    /**
+     * Gets date time string.
+     *
+     * @return the date time string
+     */
     public static String getDateTimeString() {
         final String DATE_FORMATTER_JOUR = "dd/MM/yyyy";
         final String DATE_FORMATTER_HEURE = "HH'h'mm";

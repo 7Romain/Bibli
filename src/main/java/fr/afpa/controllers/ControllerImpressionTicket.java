@@ -1,14 +1,17 @@
 package fr.afpa.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import fr.afpa.outils.Utile;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+/**
+ * The type Controller impression ticket.
+ */
 public class ControllerImpressionTicket implements Initializable {
 
     @FXML

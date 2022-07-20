@@ -1,10 +1,13 @@
 package fr.afpa.controllers;
 
+import javafx.fxml.Initializable;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.fxml.Initializable;
-
+/**
+ * The type Controller fiche exemplaire.
+ */
 public class ControllerFicheExemplaire implements Initializable {
 
     @Override

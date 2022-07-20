@@ -1,8 +1,10 @@
 package fr.afpa.controllers;
 
 import fr.afpa.app.App;
+import fr.afpa.entites.Livre;
 import fr.afpa.entites.Theme;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,77 +20,165 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import static fr.afpa.outils.Utile.lireBib;
-import static fr.afpa.outils.Utile.lireTheme;
+import static fr.afpa.outils.Utile.*;
 
 /**
- * The type Controller stat.
+ * Controller de la fiche de stat.
  */
 public class ControllerStat implements Initializable {
-    private static final String TAB_Theme = "Tableau par thème";
+    /**
+     * Constante de "Tableau par thème".
+     */
+    private static final String TAB_THEME = "Tableau par thème";
+    /**
+     * Constante de "Tableau par livre".
+     */
     private static final String TAB_LIVRE = "Tableau par livre";
+    /**
+     * Constante de "Graphique par thème".
+     */
     private static final String GRAF_THEME = "Graphique par thème";
-
+    /**
+     * Constante du nombre d'année consultable.
+     */
+    private static final int NB_ANNEE = 5;
+    /**
+     * The Menu bar.
+     */
     @FXML
-    private TableColumn colDescription;
-
-    @FXML
-    private ComboBox cbxVue;
+    public MenuBar menuBar;
+    /**
+     * bouton pour retourner au menu principal.
+     */
     @FXML
     private Button btnMenuPrincipal;
+    /**
+     * combo box pour choisir la vue .
+     */
+    @FXML
+    private ComboBox cbxVue;
+    /**
+     * combo box pour choisir l'année .
+     */
     @FXML
     private ComboBox cbxAnnee;
-    @FXML
-    private Label lblTitre;
+    /**
+     * combo box pour choisir la bibliotheque .
+     */
     @FXML
     private ComboBox cbxBib;
+    /**
+     * label du titre de la recherche.
+     */
     @FXML
-    private Button btnAnnuler;
-    @FXML
-    private Button btnImprimer;
-    @FXML
-    private TableView<Theme> tabTheme;
-    @FXML
-    private Button btnValiderBot;
-    @FXML
-    private Button btnValiderTop;
-    @FXML
-    private Label lblRole;
-    @FXML
-    private AnchorPane panResu;
-    @FXML
-    private TableView tabLivres;
+    private Label lblTitre;
+    /**
+     * label date bas de page.
+     */
     @FXML
     private Label lblDate;
+    /**
+     * label role en bas de page.
+     */
+    @FXML
+    private Label lblRole;
+    /**
+     * bouton annuler.
+     */
+    @FXML
+    private Button btnAnnuler;
+    /**
+     * bouton imprimer.
+     */
+    @FXML
+    private Button btnImprimer;
+    /**
+     * bouton valider en bas.
+     */
+    @FXML
+    private Button btnValiderBot;
+    /**
+     * bouton valider en haut.
+     */
+    @FXML
+    private Button btnValiderTop;
+    /**
+     * pane contnant le résultat.
+     */
+    @FXML
+    private AnchorPane panResu;
+
+    /**
+     * tableau de theme
+     */
+    @FXML
+    private TableView<Theme> tabTheme;
+    /**
+     * colonne de code de theme.
+     */
     @FXML
     private TableColumn colCodeTheme;
+    /**
+     * colonne de theme.
+     */
     @FXML
     private TableColumn colTheme;
+    /**
+     * colonne de description de theme.
+     */
     @FXML
-    private TableColumn colNbEmpruntLivre;
-    @FXML
-    private TableColumn ColTitre;
-    @FXML
-    private TableColumn colISBN;
-    @FXML
-    private TableColumn colNbExemplaire;
-    @FXML
-    private TableColumn ColAuteur;
+    private TableColumn colDescription;
+    /**
+     * colonne de nombre d'emprunt par theme.
+     */
     @FXML
     private TableColumn colNbEmpruntTheme;
+
+    /**
+     * tableau de livre .
+     */
+    @FXML
+    private TableView tabLivres;
+    /**
+     * colonne de l'isbn du livre.
+     */
+    @FXML
+    private TableColumn colISBN;
+    /**
+     * colonne du titre du livre.
+     */
+    @FXML
+    private TableColumn colTitre;
+    /**
+     * colonne de l'auteur du livre.
+     */
+    @FXML
+    private TableColumn colAuteur;
+    /**
+     * colonne du theme du livre.
+     */
     @FXML
     private TableColumn colThemeLivre;
+    /**
+     * colonne du nombre d'exemplaire du livre.
+     */
     @FXML
-    private MenuBar menuBar;
+    private TableColumn colNbExemplaire;
+    /**
+     * colonne du nombre d'emprunt du livre.
+     */
+    @FXML
+    private TableColumn colNbEmpruntLivre;
 
     /**
      * On click valider.
      * rend visible les boutons voulus et le paneau de résultat
-     * rend invisible les boutons non voulus
+     * rempli selon le choix de vue le tableau correspondant
      */
     @FXML
     public void onClickValider() {
-        lblTitre.setText(String.format("%s pour %s : %s", cbxBib.getValue(), cbxAnnee.getValue(), cbxVue.getValue()));
+        lblTitre.setText(String.format("%s pour %s : %s",
+                cbxBib.getValue(), cbxAnnee.getValue(), cbxVue.getValue()));
         panResu.setVisible(true);
         btnImprimer.setVisible(true);
         btnAnnuler.setVisible(true);
@@ -96,51 +186,76 @@ public class ControllerStat implements Initializable {
 
         String vue = (String) cbxVue.getValue();
         switch (vue) {
-            case TAB_Theme -> {
+            case TAB_THEME -> {
                 tabTheme.setVisible(true);
                 tabLivres.setVisible(false);
                 ObservableList<Theme> listTheme = lireTheme();
-                colCodeTheme.setCellValueFactory(new PropertyValueFactory<Theme, String>("codeTheme"));
-                colTheme.setCellValueFactory(new PropertyValueFactory<Theme, String>("theme"));
-                colDescription.setCellValueFactory(new PropertyValueFactory<Theme, String>("descripTheme"));
-                colNbEmpruntTheme.setCellValueFactory(new PropertyValueFactory<Theme, String>("nbEmprunt"));
-
+                colCodeTheme.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("codeTheme"));
+                colTheme.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("theme"));
+                colDescription.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>(
+                                "descripTheme"));
+                colNbEmpruntTheme.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("nbEmprunt"));
                 tabTheme.setItems(listTheme);
-
             }
             case TAB_LIVRE -> {
                 tabLivres.setVisible(true);
                 tabTheme.setVisible(false);
+                ObservableList<Livre> listLivre = lireLivre();
+                colISBN.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("IsbnLivre"));
+                colTitre.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("titreLivre"));
+                colAuteur.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("auteur"));
+                colThemeLivre.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("codTheme"));
+                colNbExemplaire.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>(
+                                "nbExemplaire"));
+                colNbEmpruntLivre.setCellValueFactory(
+                        new PropertyValueFactory<Theme, String>("nbEmprunt"));
+                tabLivres.setItems(listLivre);
             }
             case GRAF_THEME -> {
                 tabLivres.setVisible(false);
                 tabTheme.setVisible(false);
             }
-
         }
     }
 
     /**
      * On click menu principal.
+     * retour au menu principal
+     *
+     * @throws IOException the io exception
      */
     @FXML
     public void onClickMenuPrincipal() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/menuPrincipal.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(
+                App.class.getResource("/fxml/menuPrincipal.fxml"));
         Stage stage = (Stage) (menuBar.getScene().getWindow());
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Emprunter");
+        stage.setTitle("Menu principal");
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * initialise la page.
+     */
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(final URL url, final ResourceBundle resourceBundle) {
         init();
     }
 
     /**
-     * initialise les Combo box;
-     * avec la list des bibliothèque grace a l'appel de la fonction lireBib() dans la classe Utile
+     * initialise les Combo box.
+     * avec la list des bibliothèque grace a l'appel
+     * de la fonction lireBib() dans la classe Utile
      * avec les 5 dernieres années (presente incluse)
      * avec les types de vue possibles
      * rend visible les boutons voulus
@@ -153,14 +268,14 @@ public class ControllerStat implements Initializable {
 
         int anneeEnCour = LocalDate.now().getYear();
         ArrayList<Integer> lstAnnee = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < NB_ANNEE; i++) {
             lstAnnee.add(anneeEnCour - i);
         }
         cbxAnnee.getItems().addAll(lstAnnee);
         cbxAnnee.setValue(cbxAnnee.getItems().get(0));
 
         ArrayList<String> lstVue = new ArrayList<>();
-        lstVue.add(TAB_Theme);
+        lstVue.add(TAB_THEME);
         lstVue.add(TAB_LIVRE);
         lstVue.add(GRAF_THEME);
         cbxVue.getItems().addAll(lstVue);
@@ -194,5 +309,18 @@ public class ControllerStat implements Initializable {
      */
     @FXML
     public void onClickPrint() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Impression en cours");
+        alert.setHeaderText("Impression en cours...");
+        alert.showAndWait();
+    }
+
+    @FXML
+    void openAbout(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("A propos");
+        alert.setHeaderText("A propos de l'application");
+        alert.setContentText("L'appli Mégathèque a été réalisée par Jérôme Chaput, Damien Gruffeille, Julien Jégo et Oziris à l'Afpa de Beaumont.\rElle est vachement bien.\r© Afpa 2022 ");
+        alert.showAndWait();
     }
 }

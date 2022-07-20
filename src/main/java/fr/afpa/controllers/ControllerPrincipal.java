@@ -44,7 +44,7 @@ public class ControllerPrincipal implements Initializable {
 
     @FXML
     void ouvrirPageEmprunt(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/afficherAdherent.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/rechercherAdherent.fxml"));
         stage = (Stage) (menuBar.getScene().getWindow());
         scene = new Scene(fxmlLoader.load());
         stage.setTitle("Emprunter");
@@ -54,10 +54,10 @@ public class ControllerPrincipal implements Initializable {
 
     @FXML
     void ouvrirPageFonds(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/ficheExemplaire.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("/fxml/menuPrincipal.fxml"));
         stage = (Stage) (menuBar.getScene().getWindow());
         scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Consulter le fonds");
+        stage.setTitle("Menu Principal");
         stage.setScene(scene);
         stage.show();
     }
@@ -77,13 +77,8 @@ public class ControllerPrincipal implements Initializable {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("A propos");
         alert.setHeaderText("A propos de l'application");
-        alert.setContentText("L'appli Mégathèque a été réalisée par Romain Benejam, Jérôme Chaput, Damien Gruffeille et Julien Jégo à l'Afpa de Beaumont.\rElle est vachement bien.\r© Afpa 2022 ");
+        alert.setContentText("L'appli Mégathèque a été réalisée par Jérôme Chaput, Damien Gruffeille, Julien Jégo et Oziris à l'Afpa de Beaumont.\rElle est vachement bien.\r© Afpa 2022 ");
         alert.showAndWait();
-    }
-
-    @FXML
-    void exit(ActionEvent event) {
-        System.exit(0);
     }
 
 
