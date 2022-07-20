@@ -1,8 +1,11 @@
 module fr.afpa.app {
     requires javafx.controls;
     requires javafx.fxml;
-    opens fr.afpa.app to javafx.fxml;
-    opens fr.afpa.controllers;
-    opens fr.afpa.entites;
-    exports fr.afpa.app;
+
+
+    opens fr.afpa.tumulte.app to javafx.fxml;
+    opens fr.afpa.tumulte.controllers;
+    opens fr.afpa.tumulte.entites;
+    opens fr.afpa.tumulte.outils;
+    exports fr.afpa.tumulte.app;
 }

@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="megatheque" />
+        <module name="Tumulte-master" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Tumulte-master" target="18" />
+    </bytecodeTargetLevel>
   </component>
 </project>
