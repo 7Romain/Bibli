@@ -3,11 +3,19 @@ package fr.afpa.controllers;
 import fr.afpa.app.App;
 import fr.afpa.entites.Livre;
 import fr.afpa.entites.Theme;
+import javafx.beans.InvalidationListener;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
@@ -16,8 +24,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static fr.afpa.outils.Utile.*;
 
@@ -168,6 +175,8 @@ public class ControllerStat implements Initializable {
      */
     @FXML
     private TableColumn colNbEmpruntLivre;
+    @FXML
+    private BarChart grfTheme;
 
     /**
      * On click valider.
@@ -188,6 +197,7 @@ public class ControllerStat implements Initializable {
             case TAB_THEME -> {
                 tabTheme.setVisible(true);
                 tabLivres.setVisible(false);
+                grfTheme.setVisible(false);
                 ObservableList<Theme> listTheme = lireTheme();
                 colCodeTheme.setCellValueFactory(
                         new PropertyValueFactory<Theme, String>("codeTheme"));
@@ -203,6 +213,7 @@ public class ControllerStat implements Initializable {
             case TAB_LIVRE -> {
                 tabLivres.setVisible(true);
                 tabTheme.setVisible(false);
+                grfTheme.setVisible(false);
                 ObservableList<Livre> listLivre = lireLivre();
                 colISBN.setCellValueFactory(
                         new PropertyValueFactory<Theme, String>("IsbnLivre"));
@@ -222,6 +233,25 @@ public class ControllerStat implements Initializable {
             case GRAF_THEME -> {
                 tabLivres.setVisible(false);
                 tabTheme.setVisible(false);
+
+                ObservableList<Theme> listTheme = lireTheme();
+                ObservableList<XYChart.Data<String, Number>> data = FXCollections.observableArrayList();
+
+                for (int i = 1; i < listTheme.size(); i++) {
+                    String item = listTheme.get(i).getTheme();
+                    int count = listTheme.get(i).getNbEmprunt();
+                    data.add(new BarChart.Data(item + "(" + count + ")", count));
+                }
+                XYChart.Series<String, Number> series = new XYChart.Series<>("Thèmes", data);
+                grfTheme.getData().setAll(series);
+
+                for (Node n : grfTheme.lookupAll(".default-color0.chart-bar")) {
+                    n.setStyle("-fx-bar-fill: #3c3c3c ");
+                }
+                grfTheme.setLegendVisible(false);
+                grfTheme.lookupAll(".chart-legend");
+                grfTheme.setAnimated(false);
+                grfTheme.setVisible(true);
             }
         }
     }
@@ -280,6 +310,7 @@ public class ControllerStat implements Initializable {
         cbxVue.getItems().addAll(lstVue);
         cbxVue.setValue(cbxVue.getItems().get(0));
 
+        grfTheme.setVisible(false);
         panResu.setVisible(false);
         btnImprimer.setVisible(false);
         btnAnnuler.setVisible(false);
@@ -301,6 +332,7 @@ public class ControllerStat implements Initializable {
         btnImprimer.setVisible(false);
         btnAnnuler.setVisible(false);
         btnValiderTop.setVisible(false);
+        grfTheme.setVisible(false);
     }
 
     /**

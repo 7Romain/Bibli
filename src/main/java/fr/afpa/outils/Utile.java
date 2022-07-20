@@ -139,7 +139,7 @@ public class Utile {
     public static ObservableList<Theme> lireTheme() {
         try {
             FileReader fileReader = new FileReader(
-                    "src/main/resources/csv/lstThèmes");
+                    "src/main/resources/csv/lstThèmes.csv");
             LineNumberReader lineNumberReader
                     = new LineNumberReader(fileReader);
             String ligneLue;
