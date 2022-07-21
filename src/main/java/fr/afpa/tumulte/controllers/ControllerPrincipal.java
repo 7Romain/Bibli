@@ -31,6 +31,10 @@ public class ControllerPrincipal implements Initializable {
     private MenuBar menuBar;
     private Stage stage;
     private Scene scene;
+    @FXML
+    private Label lblRole;
+    @FXML
+    private MenuItem menuEmprunt;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class ControllerAfficherAdherent implements Initializable {
@@ -62,15 +63,11 @@ public class ControllerAfficherAdherent implements Initializable {
     @FXML
     private TableView<Exemplaire> tblPretEnCours;
     @FXML
-    private Font x3;
-    @FXML
-    private Font x31;
-    @FXML
-    private Color x4;
-    @FXML
-    private Color x41;
-    @FXML
     private MenuBar menuBar;
+    @FXML
+    private Label lblDate;
+    @FXML
+    private MenuItem itmAbout;
 
     /**
      * @param event
@@ -142,6 +139,8 @@ public class ControllerAfficherAdherent implements Initializable {
 
         );
 
+        DateTimeFormatter frformat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        lblDate.setText(LocalDate.now().format(frformat));
 
         tblPretEnCours.setEditable(true);
         colTtlTitre.setCellValueFactory(new PropertyValueFactory<Exemplaire, String>("titre"));
